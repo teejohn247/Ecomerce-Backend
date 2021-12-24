@@ -14,10 +14,8 @@ const userRegister = async (req, res) => {
 
   try {
     const { username, email, password } = req.body;
-    console.log(username, email, password)
 
     let user = await User.findOne({ email });
-    console.log(user);
 
     if (user) {
         res.status(400).json({
@@ -29,7 +27,6 @@ const userRegister = async (req, res) => {
 
     const salt = await bcrypt.genSalt(10);
     const hashed = await bcrypt.hash(password, salt);
-    console.log(hashed)
 
     user = new User({
         username: username,
@@ -40,7 +37,6 @@ const userRegister = async (req, res) => {
 
     await user.save();
     const token = utils.encodeToken(user.id, user.name, user.email)
-    console.log(token);
     res.status(201).json({
         status: 201,
         token,
