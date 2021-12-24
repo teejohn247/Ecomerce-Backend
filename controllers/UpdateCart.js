@@ -12,6 +12,6 @@ const updateCart = async(req,res) => {
         res.status(200).json(updatedCart);
       } catch (err) {
         res.status(500).json(err);
-      }
+    }
 }
 export default updateCart;
